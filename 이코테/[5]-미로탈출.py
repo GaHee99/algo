@@ -16,6 +16,7 @@ def bfs(x,y):
     while queue:
         x, y = queue.popleft()
         # 현재 위치에서 네방향 확인 
+        print("x,y " , x,y)
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
