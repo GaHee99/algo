@@ -16,7 +16,8 @@ def DFS (L,score, time):
         if score>Max:
             Max = score 
     else:
-        DFS(L+1, score+problems[L][0],time+problems[L][1])
+        DFS(L+1, score+problems[L][0], time+problems[L][1])
         DFS(L+1, score,time)
+
 DFS(0,0,0)
 print(Max)
