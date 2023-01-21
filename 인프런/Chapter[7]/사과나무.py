@@ -14,21 +14,20 @@ que = deque([(middle,middle)])
 res=Map[middle][middle]
 ch[middle][middle]=1
 count=0
-while que:
-    x, y = que.popleft() 
-    for i in range(4):
-        nx = dx[i]+ x
-        ny = dy[i]+ y
-        if 0<=nx<n and 0<=ny<n :
-            if ch[nx][ny]== 0:
+L=0
+while True:
+    if L==n//2:
+        break
+    size = len(que)
+    for i in range(size):
+        x, y = que.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if ch[nx][ny]==0:
                 ch[nx][ny]=1
-                res= res+Map[nx][ny]
+                res+=Map[nx][ny]
                 que.append((nx,ny))
-        else:
-            print(res)
-            sys.exit(0)
- 
-            
-
-
+    L=L+1
+print(res)
 
