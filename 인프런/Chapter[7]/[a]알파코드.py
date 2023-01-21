@@ -2,30 +2,28 @@
 import sys
 sys.stdin = open("인프런/Chapter[7]/input.txt")
 
-number = list(map(int,input()))
-numberList = []
-for i in range(len(number)):
-    numberList.append([])
-print(numberList)
+code = list(map(int,input()))
+n = len(code) # n이 종착점 
+code.insert(n,-1) # 마지막을 알림 , out of index 처리 
+res = [0]*(n+3) 
+cnt = 0 
 
-numberList[0].append(2)
+def DFS(L, P): 
+    global cnt
+    if L == n :
+        cnt+=1 
+        for j in range(P):
+            print(chr(res[j]+64),end='')
+        print()
+    else:
+        for i in range(1,27):
+            if code[L] == i :
+                res[P]=i
+                DFS(L+1, P+1)
+            elif i >= 10 and code[L]== i//10 and code[L+1] == i%10:
+                res[P]=i
+                DFS(L+2, P+1) # P는 값을 집어 넣는 index이므로 ,, ,
+            
 
-def DFS(L):
-    if L == len(number):
-        print(numberList)
-    else:   
-        if len(numberList[L-1])==1:
-            former = numberList[L-1][0]
-            res = str(former)+str(number[L])
-            if 1<=int(res)<=26:
-                numberList[L-1].append(number[L])
-                print(numberList)
-                DFS(L+1)
-        else:
-            numberList[L-1].append(number[L])
-            print(numberList)
-            DFS(L+1)
-                
-
-
-DFS(1) # number[1] = 5
+DFS(0,0)
+print(cnt)
