@@ -9,25 +9,22 @@ res = []
 dx = [0,0,-1,1]
 dy = [1,-1,0,0]
 def DFS(x,y):
-    global S
-    if x<0 or y < 0 or x>=n or y>=n:
-        return 
-    else:
-        if Map[x][y]==1:
-            Map[x][y]=0
-            S.add((x,y))
-            for i in range(4):
-                DFS(dx[i]+x, dy[i]+y)
-                
+    global count
+    count+=1
+    Map[x][y]=0
+    for i in range(4):
+        xx = x + dx[i]
+        yy = y + dy[i]
+        if 0<=xx<n and 0<=yy<n and Map[xx][yy]==1:
+            DFS(xx, yy)
 
-
+count=0
 for i in range(n):
     for k in range(n):
         if Map[i][k]==1:
-            S = set()
+            count=0
             DFS(i,k)
-            S.add((i,k))
-            res.append(len(S))
+            res.append(count)
 print(len(res))
 res.sort()
 for i in res:
