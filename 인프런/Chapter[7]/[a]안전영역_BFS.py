@@ -1,7 +1,7 @@
 import sys
 sys.stdin = open("인프런/Chapter[7]/input.txt")
 from collections import deque
-import copy
+
 n = int(input())
 M = []
 S = set()
