@@ -2,31 +2,34 @@ import sys
 sys.stdin = open("인프런/Chapter[7]/input.txt")
 from collections import deque
 
-# n : 노드, m: 간선 수, k = 거리, x : 시작 
-n,m,k,x = map(int,input().split())
+n = int(input())
+apples =[]
 
-# 연결 돼있는 간선 받기 위한 그래프
-graph = [[] for _ in range(n+1)]
+for i in range(n):
+    apples.append(list(map(int,input().split())))
+ch = [[0]*n for _ in range(n)]
+middle = n//2
+ch[middle][middle]=1
+res=apples[middle][middle]
+dx = [0,0,-1,1]
+dy = [1,-1,0,0]
 
-# 거리를 위한 그래프 
-distance = [0]*(n+1)
+que = deque([(middle,middle)])
+L=0
+while True:
+    if L == n//2:
+        break
+    else:
+        for _ in range(len(que)):
+            x, y = que.popleft()
+            for i in range(4):
+                nx = dx[i] + x
+                ny = dy[i] + y
+                if ch[nx][ny]==0:
+                    ch[nx][ny]=1
+                    res+=apples[nx][ny]
+                    que.append((nx,ny))
+        L=L+1
+print(res)
 
-for _ in range(m):
-    start_node, end_node  = map(int,input().split())
-    graph[start_node].append(end_node)
 
-# 처음 시작 노드 넣고 
-que = deque([x])
-while que:
-    current = que.popleft()
-    for next_node in graph[current]:
-        if distance[next_node]==0:
-            distance[next_node] = distance[current]+1
-            que.append(next_node)
-flg = False
-for index, dis in enumerate(distance):
-    if dis == k:
-        print(index)
-        flg = True
-if flg==False:
-    print(-1)
