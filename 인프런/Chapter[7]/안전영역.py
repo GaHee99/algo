@@ -1,6 +1,7 @@
 import sys
 sys.stdin = open("인프런/Chapter[7]/input.txt")
 from collections import deque
+import copy
 n = int(input())
 M = []
 S = set()
@@ -38,9 +39,9 @@ def BFS(max,Map):
 
 res= []
 for i in S:
-    tmp = [] 
-    for k in M:
-        tmp.append(k)
-    BFS(i,tmp)
-    print(M)
+    tmp = copy.deepcopy(M)
+    res.append(BFS(i,tmp))
+res.sort(reverse=True)
+print(res[0])
+
    
