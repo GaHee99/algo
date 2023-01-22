@@ -29,5 +29,6 @@ for i in range(n):
             S.add((i,k))
             res.append(len(S))
 print(len(res))
+res.sort()
 for i in res:
     print(i)
