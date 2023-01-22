@@ -2,34 +2,28 @@ import sys
 sys.stdin = open("인프런/Chapter[7]/input.txt")
 from collections import deque
 
-n = int(input())
-apples =[]
+# DFS
+# 인접 행렬 그래프
+node, edge = map(int,input().split())
+Matrix = [[0]*(node) for _ in range(node)]
 
-for i in range(n):
-    apples.append(list(map(int,input().split())))
-ch = [[0]*n for _ in range(n)]
-middle = n//2
-ch[middle][middle]=1
-res=apples[middle][middle]
-dx = [0,0,-1,1]
-dy = [1,-1,0,0]
+for i in range(edge):
+    start, end = map(int,input().split())
+    Matrix[start-1][end-1] = 1
 
-que = deque([(middle,middle)])
-L=0
-while True:
-    if L == n//2:
-        break
+count = 0 
+ch=[0]*node
+ch[0]=1
+def DFS(L):
+    global count
+    if L == node-1:
+        count+=1
     else:
-        for _ in range(len(que)):
-            x, y = que.popleft()
-            for i in range(4):
-                nx = dx[i] + x
-                ny = dy[i] + y
-                if ch[nx][ny]==0:
-                    ch[nx][ny]=1
-                    res+=apples[nx][ny]
-                    que.append((nx,ny))
-        L=L+1
-print(res)
-
+        for i in range(0, node):
+            if Matrix[L][i]==1 and ch[i]==0:
+                ch[i]=1
+                DFS(i)
+                ch[i]=0
+DFS(0)
+print(count)
 
