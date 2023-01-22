@@ -9,19 +9,20 @@ M = []
 for i in range(n):
     M.append(list(map(int,input().split())))
 count=0
-que = deque()
+
+def DFS(x,y):
+    for i in range(8):
+        xx = x + dx[i]
+        yy = y + dy[i]
+        if 0<=xx<n and 0<=yy<n and M[xx][yy]==1:
+            M[xx][yy]=0
+            DFS(xx,yy)
+
+
 for i in range(n):
     for k in range(n):
         if M[i][k]==1:
-            que.append((i,k))
             count+=1
-            while que:
-                x, y = que.popleft()
-                for m in range(8):
-                    xx = x + dx[m]
-                    yy = y + dy[m]
-                    if 0<=xx<n and 0<=yy<n and M[xx][yy]==1:
-                        M[xx][yy]=0
-                        que.append((xx,yy))
+            DFS(i,k)
 print(count)
 
