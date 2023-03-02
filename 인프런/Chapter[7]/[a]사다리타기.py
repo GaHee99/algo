@@ -2,23 +2,29 @@ import sys
 from collections import deque
 sys.stdin=open("인프런\Chapter[7]\input.txt", "r")
 
+
 sa = []
-dx = [0,-1,1]
-dy = [1,0,0]
+dx = [1,0,0]
+dy = [0,-1,1]
+
 for i in range(10):
     sa.append(list(map(int,input().split())))
    
-for k in range(10):
-    if sa[9][k]==2:
-        resultY = k
-resultX = 9
-count=0
-def DFS(x, y):
-    global count
-    if y == 9 and sa[x][y]==2:
+# 도착점 확인 
+for i in range(10):
+    if sa[9][i] == 2:
+        resultY = i 
+
+# 도착점  X, Y 
+resultX = 9 
+
+print(resultY)
+
+def DFS(x,y):
+    if x == 9 and y == resultY:
         return True
-    if y == 9 and sa[x][y]==1:
-        count+=1
+    if x== 9 : 
+        print(x,y)
         return False
     for i in range(3):
         nx = x + dx[i]
@@ -27,11 +33,11 @@ def DFS(x, y):
             sa[nx][ny]=0
             DFS(nx,ny)
             sa[nx][ny]=1
-
-for row in range(10):
-    if sa[0][row]==1:
-        if (DFS(0,row) == True):
-            print(row)
-print(count)
+            DFS(nx,ny)
 
 
+
+for i in range(9):
+    if sa[0][i] == 1: 
+        print(i)
+        DFS(0,i)

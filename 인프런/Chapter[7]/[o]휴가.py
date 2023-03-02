@@ -1,5 +1,5 @@
 import sys
-# sys.stdin = open("인프런/Chapter[7]/input.txt")
+sys.stdin = open("인프런/Chapter[7]/input.txt")
 
 def DFS(day, pay):
     global Max

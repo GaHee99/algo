@@ -7,7 +7,6 @@ from collections import deque
 # 최소 몇 번의 점프로 현수가 송아지의 위치까지 갈 수 있는지 
 # 현수의 위치 : 5, 송아지의 위치 : 14
 h , s = map(int,input().split())
-go = [-1,1,5]
 que = deque([h])
 distance = [-1]*(10000+1)
 distance[h]=0
