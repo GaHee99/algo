@@ -8,6 +8,8 @@ from collections import deque
 # 현수의 위치 : 5, 송아지의 위치 : 14
 h , s = map(int,input().split())
 que = deque([h])
+
+
 distance = [-1]*(10000+1)
 distance[h]=0
 while que:

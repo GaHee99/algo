@@ -1,43 +1,22 @@
 import sys
-from collections import deque
-sys.stdin=open("인프런\Chapter[7]\input.txt", "r")
+sys.stdin = open("인프런/Chapter[7]/input.txt")
 
-
-sa = []
-dx = [1,0,0]
-dy = [0,-1,1]
-
-for i in range(10):
-    sa.append(list(map(int,input().split())))
-   
-# 도착점 확인 
-for i in range(10):
-    if sa[9][i] == 2:
-        resultY = i 
-
-# 도착점  X, Y 
-resultX = 9 
-
-print(resultY)
-
-def DFS(x,y):
-    if x == 9 and y == resultY:
-        return True
-    if x== 9 : 
+def DFS(x, y):
+    ch[x][y]=1
+    if x==0:
+        print(y)
+    else:
         print(x,y)
-        return False
-    for i in range(3):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if 0<=nx<=9 and 0<=ny<=9 and sa[nx][ny]==1:
-            sa[nx][ny]=0
-            DFS(nx,ny)
-            sa[nx][ny]=1
-            DFS(nx,ny)
+        if y-1>=0 and board[x][y-1]==1 and ch[x][y-1]==0:
+            DFS(x, y-1)
+        elif y+1<10 and board[x][y+1]==1 and ch[x][y+1]==0:
+            DFS(x, y+1)
+        else:
+            DFS(x-1, y)
 
 
-
-for i in range(9):
-    if sa[0][i] == 1: 
-        print(i)
-        DFS(0,i)
+board=[list(map(int, input().split())) for _ in range(10)]
+ch=[[0]*10 for _ in range(10)]
+for y in range(10):
+    if board[9][y]==2:
+        DFS(9, y)

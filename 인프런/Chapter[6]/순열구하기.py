@@ -1,5 +1,5 @@
 import sys
-sys.stdin = open("인프런/Chapter[6]/input.txt",'r')
+# sys.stdin = open("인프런/Chapter[6]/input.txt",'r')
 
 n, m = map(int,input().split())
 res = [0]* m 
