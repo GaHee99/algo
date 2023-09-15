@@ -8,14 +8,10 @@ number_list.sort(reverse=True)
 
 first, second = number_list[0], number_list[1]
 
-# K번반복 
-count = 0
-for i in range(M):
-    if count == K:
-        result += second
-        count = 0
-    else:
-        result += first
-        count+=1
+count = int(M/(K+1))*K
+count += M%(K+1)
+
+result += (count) * first
+result += (M-count) * second
 
 print(result)
